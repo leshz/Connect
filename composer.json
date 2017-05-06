@@ -1,15 +1,22 @@
 {
-  "name": "Connect/silex-usuarios-doctrine",
-  "require": {
-    "silex/silex": "^1.3",
-    "twig/twig": "^1.23",
-    "symfony/twig-bridge": "^2.7",
-    "doctrine/dbal": "v2.5.4",
-    "symfony/doctrine-bridge": "^2.7"
-  },
-  "autoload" : {
-    "psr-4" : {
-      "Modelo\\" : "Modelo/"
+    "name": "Shz/conect",
+    "description": "Aplicacion para la publicacion de eventos en la ciudad",
+    "require": {
+        "silex/silex": "^2.1",
+        "twig/twig": "1.31.",
+        "symfony/twig-bridge": "^2.7",
+        "doctrine/dbal": "v2.5.4",
+        "symfony/doctrine-bridge": "^2.7",
+        "symfony/asset": "^3.2"
+    },
+    "license": "MIT",
+    "authors": [{
+        "name": "leshz",
+        "email": "leshz@me.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "Modelo\\": "Modelo/"
+        }
     }
-  }
 }

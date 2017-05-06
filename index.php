@@ -10,17 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 // uso de las clases para crear un esquema en Doctrine
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Column;
-// uso de copilador less
 
-use Less\Provider\LessServiceProvider;
- 
+
 // Crea la Aplicación
 // ==================
 
 $app = new Silex\Application();
-
-// configurar el generador de URLs
-$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 // configura el manejo de sesiones
 $app->register(new Silex\Provider\SessionServiceProvider());
@@ -31,13 +26,12 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 
-
-// configura la conexión a la base de datos
+// Configura la conexión a la base de datos
 $app->register(
   new Silex\Provider\DoctrineServiceProvider(),
   array(
     'db.options' => array(
-      'dbname' => 'connect_db',
+      'dbname' => 'Connect_db',
   	  'host' => 'localhost',
   	  'user' => 'root',
   	  'password' => '',
@@ -48,26 +42,12 @@ $app->register(
   )
 );
 
-/*
 
-
-// == Redirige el navegador en Koding
-
-// el URL inicia con "//"
-if ( substr($_SERVER['REQUEST_URI'], 0, 2) == '//') {
-  // redirige el navegador para que el URL no tenga "//"
-  header('Location: '.substr($_SERVER['REQUEST_URI'],1));
-  die;
-}
-*/
-
-
-// el URL inicia con "//"
-if ( substr($_SERVER['REQUEST_URI'], 0, -1) == '/connect') {
-    header('Location: '.$_SERVER['REQUEST_URI'].'index.php');
-    die;
-}
-
+//el URL inicia con "//"
+// if ( substr($_SERVER['REQUEST_URI'], 0, -1) == '/') {
+//     header('Location: '.$_SERVER['REQUEST_URI'].'index.php');
+//     die;
+// }
 
 
 // == ejecuta pruebas sobre la base de datos
