@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Home | Connect</title>
+    <base href="/conect/">
+    <link rel="shortcut icon" href="resources/favicon.ico">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="resources/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/template-cop.css" />
+    <link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link href="resources/css/animsition.css" rel="stylesheet">
+    <!-- <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'> -->
+    <script src="resources/js/snap.svg-min.js"></script>
+</head>
+
+<body>
+    <div class="animsition">
+        <!-- Login mode -->
+        <div class="container">
+            <div id="modal" class="popupContainer" style="display:none;">
+                <header class="popupHeader">
+                    <span class="header_title">Iniciar sesion</span>
+                    <span class="modal_close"><i class="fa fa-times"></i></span>
+                </header>
+                <section class="popupBody">
+                    <!-- Social Login -->
+                    <div class="social_login">
+                        <div class="container">
+                            <h2>Bienvenido :)</h2>
+                            <form action="{{url('dologin')}}" method="post">
+                                <input id="email" type="text" name="usuario" placeholder="usuario" autocomplete="off" />
+                                <input id="password" type="password" name="contrasena" placeholder="contraseña" />
+                                <button id="btn-submit" type="submit" value="log_in">Iniciar sesion</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!--  / Login mode -->
+        <div class="container">
+            <!--Menu  -->
+            <nav id="menu" class="menu">
+                <button class="menu__handle"><span>Menu</span></button>
+                <div class="menu__inner">
+                    <ul>
+                        {% if sstade %}
+                        <li class="nameprofile">{{suser.login}}</li>
+                        {% if suser.administrador == true %}
+                        <li class="typeprofile">administrador</li>
+                        <li><a href="index.php"><span class="icon-circle"><i class="fa fa-home" aria-hidden="true"></i></span>Home</a></li>
+                        <li><a href="{{url('buscador')}}"><i class="fa fa-calendar" aria-hidden="true"></i><span>Admin Eventos</span></a></li>
+                        <li><a href="{{url('tipos')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>Admin Tipos</span></a></li>
+                        <li><a href="{{url('salir')}}"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Salir</span></a></li>
+                        {% else %}
+                        <li class="typeprofile">usuario</li>
+                        <ul class="navigation-menu">
+                            <li><a href="index.php"><span class="icon-circle"><i class="fa fa-home"></i></span>Home</a></li>
+                            <li><a href="{{url('buscador')}}"><i class="fa fa-search" aria-hidden="true"></i><span>Buscar Eventos</span></a></li>
+                            <li><a href="{{url('salir')}}"><span class="icon-circle"><i class="fa fa-sign-out"></i></span>Salir</a></li>
+                        </ul>
+                        {% endif %} {% else %}
+                        <li><a href="index.php"><i class="fa fa-fw fa-home"></i><span>Home</span></a></li>
+                        <li><a id="modal_trigger" href="#modal"><i class="fa fa-paw" aria-hidden="true"></i><span>Login</span></a></li>
+                        <li><a href="{{url('buscador')}}"><i class="fa fa-search" aria-hidden="true"></i><span>Buscar Eventos</span></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="morph-shape" data-morph-open="M300-10c0,0,295,164,295,410c0,232-295,410-295,410" data-morph-close="M300-10C300-10,5,154,5,400c0,232,295,410,295,410">
+                    <svg width="100%" height="100%" viewBox="0 0 600 800" preserveAspectRatio="none">
+                        <path fill="none" d="M300-10c0,0,0,164,0,410c0,232,0,410,0,410" />
+                    </svg>
+                </div>
+            </nav>
+            <!--Menu  -->
+            <div class="main">
+                <div class="container demo-1">
+                    <div class="content">
+                        <div id="large-header" class="large-header">
+                            <canvas id="demo-canvas"></canvas>
+                            <h1 class="main-title">Conectate<br> <span class="thin">Con tu artistas</span></h1>
+                        </div>
+                        <div class="header">
+                            <h1>Connect <span>es una plataforma que te mantiene informado acerca de eventos en tu ciudad</span></h1>
+                        </div>
+                    </div>
+                    <!-- Related demos -->
+                    <section class="no-padding sbuscar">
+                        <div class="buscador">
+                            <form class="busform" method="post" action="{{url('buscar')}}">
+                                <h2>¿ Qué deseas buscar ?</h2>
+                                <input type="text" name="busqueda" placeholder="puedes buscar por artista o evento" class="form-input form-input-turqouise" />
+                                <h2>¿ De cuantas estrellas buscas tu evento ?</h2>
+                                <input type="text" name="estrellas" placeholder="Recuerda poner un numero de 1 a 5" class="form-input form-input-turqouise" />
+                                <h2>¿ Cuanto quieres gastar en tu entrada ?</h2>
+                                <input class="range blue" type="range" name="money" id="moneyid" value="0" min="0" max="{{max.maximo}}" step="10000" oninput="moneyidout.value = moneyid.value">
+                                <div class="moneyplz">
+                                    <output name="moneynameout" id="moneyidout">00000</output>
+                                </div>
+                                <button type="submit">buscar</button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <!-- /container -->
+            </div>
+            <!-- /main -->
+        </div>
+        <!-- /container -->
+        <script src="resources/js/jquery.min.js"></script>
+        <script src="resources/js/animsition.js" charset="utf-8"></script>
+        <script src="resources/js/classie.js"></script>
+        <script src="resources/js/TweenLite.min.js"></script>
+        <script src="resources/js/EasePack.min.js"></script>
+        <script src="resources/js/rAF.js"></script>
+        <script src="resources/js/demo-1.js"></script>
+        <script src='resources/js/jquery.leanModal.min.js'></script>
+        <script src='resources/js/script.js'></script>
+        <script>
+        (function() {
+
+            function SVGMenu(el, options) {
+                this.el = el;
+                this.init();
+            }
+
+            SVGMenu.prototype.init = function() {
+                this.trigger = this.el.querySelector('button.menu__handle');
+                this.shapeEl = this.el.querySelector('div.morph-shape');
+
+                var s = Snap(this.shapeEl.querySelector('svg'));
+                this.pathEl = s.select('path');
+                this.paths = {
+                    reset: this.pathEl.attr('d'),
+                    open: this.shapeEl.getAttribute('data-morph-open'),
+                    close: this.shapeEl.getAttribute('data-morph-close')
+                };
+
+                this.isOpen = false;
+
+                this.initEvents();
+            };
+
+            SVGMenu.prototype.initEvents = function() {
+                this.trigger.addEventListener('click', this.toggle.bind(this));
+            };
+
+            SVGMenu.prototype.toggle = function() {
+                var self = this;
+
+                if (this.isOpen) {
+                    classie.remove(self.el, 'menu--anim');
+                    setTimeout(function() {
+                        classie.remove(self.el, 'menu--open');
+                    }, 250);
+                } else {
+                    classie.add(self.el, 'menu--anim');
+                    setTimeout(function() {
+                        classie.add(self.el, 'menu--open');
+                    }, 250);
+                }
+                this.pathEl.stop().animate({
+                    'path': this.isOpen ? this.paths.close : this.paths.open
+                }, 350, mina.easeout, function() {
+                    self.pathEl.stop().animate({
+                        'path': self.paths.reset
+                    }, 800, mina.elastic);
+                });
+
+                this.isOpen = !this.isOpen;
+            };
+
+            new SVGMenu(document.getElementById('menu'));
+
+        })();
+        </script>
+        <script>
+        // Plugin options and our code
+        $("#modal_trigger").leanModal({
+            top: 100,
+            overlay: 0.6,
+            closeButton: ".modal_close"
+        });
+
+        $(function() {
+            // Calling Login Form
+            $("#login_form").click(function() {
+                $(".social_login").hide();
+                $(".user_login").show();
+                return false;
+            });
+
+            // Calling Register Form
+            $("#register_form").click(function() {
+                $(".social_login").hide();
+                $(".user_register").show();
+                $(".header_title").text('Register');
+                return false;
+            });
+
+            // Going back to Social Forms
+            $(".back_btn").click(function() {
+                $(".user_login").hide();
+                $(".user_register").hide();
+                $(".social_login").show();
+                $(".header_title").text('Login');
+                return false;
+            });
+        });
+        </script>
+        <script>
+        // hide password input, forgot password and button submit
+        $('#password').hide();
+        $('#btn-submit').hide();
+        $('#forgot-password').hide();
+
+        $('#email').keyup(function() {
+            // if email input is not empty fadeIn password input
+            if ($(this).val() !== '') {
+                $('#password').fadeIn(500);
+                $('#forgot-password').fadeIn(500);
+            } else if ($('#btn-submit').is(":visible")) {
+                $('#btn-submit').fadeOut(500);
+                $('#password').delay(500).fadeOut(500);
+                $('#forgot-password').delay(500).fadeOut(500);
+            } else {
+                $('#password').fadeOut(500);
+                $('#forgot-password').fadeOut(500);
+            }
+        });
+
+        $('#password').keyup(function() {
+            // if password input is not empty fadeIn submit button
+            if ($(this).val() !== '') {
+                $('#btn-submit').fadeIn(500);
+            } else {
+                $('#btn-submit').fadeOut(500);
+            }
+        });
+        </script>
+        <script>
+        $(document).ready(function() {
+            $('.animsition').animsition();
+        });
+        </script>
+    </div>
+</body>
+
+</html>
