@@ -12,6 +12,8 @@ use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\Column;
 
 
+
+
 // Crea la Aplicación
 // ==================
 
@@ -23,6 +25,15 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 // configurar Twig en la Aplicación
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__ . '/views',
+));
+
+
+$app->register(new Silex\Provider\AssetServiceProvider(), array(
+    'assets.version' => 'v1',
+    'assets.named_packages' => array(
+        'css' => array('version' => 'css3', 'base_path' => '/coco/coco'),
+        'images' => array('base_urls' => array('https://img.example.com')),
+    ),
 ));
 
 
@@ -348,18 +359,19 @@ $app->post('/doevento', function(Request $request) use($app) {
 
     }
     else{
-        
             /* ID  no definido  Para entrar nuevo a eventos  */
-            $app['db']->insert('evento', array(
-                'nombre' => $nombre,
-                'artista' =>$artista,
-                'fecha_evento' =>$fecha,
-                'precioBoleta' =>$precio,
-                'longitud' =>$longitud,
-                'latitud' =>$latitud,
-                'estrella'=>$estrella,
-                'tipo_id'=>$tipoid[id]));
-            }
+             $app['db']->insert('evento', array(
+                 'nombre' => $nombre,
+                 'artista' =>$artista,
+                 'fecha_evento' =>$fecha,
+                 'precioBoleta' =>$precio,
+                 'longitud' =>$longitud,
+                 'latitud' =>$latitud,
+                 'estrella'=>$estrella,
+                 'tipo_id'=>$tipoid[id]));
+             }
+
+       
             
         return $app->redirect($app['url_generator']->generate('buscador'));
             
@@ -435,3 +447,4 @@ $app->get('/logout', function() use($app) {
 
 
 $app->run();
+
