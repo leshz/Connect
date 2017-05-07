@@ -136,6 +136,7 @@ $app->post('/buscar-evento', function(Request $request) use($app) {
         
         $mensaje="Estos son todos nuestros eventos disponibles";
         $eventos = $app['db']->fetchAll('SELECT * FROM evento ');
+
     }
     elseif ($money!=0&&$busqueda!=null&&$estrella!=null) {
 
@@ -177,6 +178,7 @@ $app->post('/buscar-evento', function(Request $request) use($app) {
         }
         
     }
+
 
   return $app['twig']->render('busqueda.twig.html',array('suser'=>$suser,'sstade'=>$sstade,'eventos'=>$eventos,'mensaje'=>$mensaje,'max'=>$preciomax));
 
