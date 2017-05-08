@@ -1,6 +1,6 @@
-# Project Title
+# Connect Web app 
 
-One Paragraph of project description goes here
+Connect es una pequeña aplicación Web para publicar eventos en la ciudad.
 
 ## Getting Started
 
