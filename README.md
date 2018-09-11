@@ -2,11 +2,15 @@
 
 Connect es una pequeña aplicación Web para publicar eventos en la ciudad.
 
-Creada con Silex  un microframework para PHP +  twig  y algunas librerias de jQuery
+Creada con Silex  un microframework para PHP +  twig  y algunas librerias de jQuery para animaciones 
+
+
 
 <!-- 
 
 ## Getting Started
+
+In
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
